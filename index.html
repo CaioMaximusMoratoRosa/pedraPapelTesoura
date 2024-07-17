@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokenpo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pedra, Papel, Tesoura</h1>
+    <h2 id="frase">Escolha uma opção</h2>
+    <div id="area-escolha">
+        <img src="img/pedra.png" onclick="select(0)" id="pedra">
+        <img src="img/papel.png" onclick="select(1)" id="papel">
+        <img src="img/tesoura.png" onclick="select(2)" id="tesoura">
+    </div>
+    
+    <div id="area-resultado">
+        <img src="img/pedra.png" id="jogador">
+        <img src="img/papel.png" id="pc">
+    </div>
+    <button id="botao" onclick="location.reload(true)">Reiniciar</button>
+
+    <script>
+        var frase = document.getElementById("frase");
+        var jogador = document.getElementById("jogador");
+        var pc = document.getElementById("pc");
+        var botao = document.getElementById("botao");
+        var areaEscolha = document.getElementById("area-escolha");
+        var areaResultado = document.getElementById("area-resultado");
+
+        var imagens = ["img/pedra.png", "img/papel.png", "img/tesoura.png"];
+
+        var index = 0;
+
+        function efeitoImagem(){
+            jogador.src = imagens[index];
+            pc.src = imagens[index];
+
+            index++;
+            if(index === 3){
+                index = 0;
+            }
+        }
+
+        var efeito = setInterval(efeitoImagem, 300);
+
+        function select(escolhaJogador){
+            areaEscolha.style.display = 'none';
+            areaResultado.style.display = 'block';
+            frase.textContent = 3;
+            var tempo = setInterval(() => {
+                var cronometro = parseInt(frase.textContent);
+                cronometro--;
+                frase.textContent = cronometro;
+
+                if (cronometro === 0) {
+                    clearInterval(tempo);
+                    clearInterval(efeito);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                var escolhaPC = Math.floor(Math.random()*3);
+
+                pc.src = imagens[escolhaPC];
+                jogador.src = imagens[escolhaJogador];
+
+                if (escolhaJogador == escolhaPC) {
+                    frase.textContent = "Empatou!";
+                    botao.style.display = 'block';
+                    return false;
+                }
+
+                if (escolhaJogador == 0 && escolhaPC == 2) {
+                    frase.textContent = "Jogador Venceu";
+                    botao.style.display = 'block';
+                } else if (escolhaJogador == 0 && escolhaPC == 1) {
+                    frase.textContent = "PC Venceu";
+                    botao.style.display = 'block';
+                } else if (escolhaJogador == 1 && escolhaPC == 0) {
+                    frase.textContent = "Jogador Venceu";
+                    botao.style.display = 'block';
+                } else if (escolhaJogador == 1 && escolhaPC == 2) {
+                    frase.textContent = "PC Venceu";
+                    botao.style.display = 'block';
+                } else if (escolhaJogador == 2 && escolhaPC == 1) {
+                    frase.textContent = "Jogador Venceu";
+                    botao.style.display = 'block';
+                } else if(escolhaJogador == 2 && escolhaPC == 0){
+                    frase.textContent = "PC Venceu";
+                    botao.style.display = 'block';
+                }
+
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>

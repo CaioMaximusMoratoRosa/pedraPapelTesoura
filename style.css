@@ -1,0 +1,33 @@
+body{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: yellow;
+}
+
+img{
+    border: 1px solid yellow;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#botao{
+    background-color: black;
+    border: 2px solid yellow;
+    color: yellow;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: none;
+    margin: auto;
+}
+
+#botao:hover{
+    background-color: yellow;
+    color: black;
+    padding: 11px 22px;
+}
+
+#area-resultado{
+    display: none;
+}
